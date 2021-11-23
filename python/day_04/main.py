@@ -1,11 +1,13 @@
 #!/usr/bin/python3
-from configparser import ConfigParser
+
 import re
+from configparser import ConfigParser
 
 
 def moddify_input_string(string):
     string = string.replace(" ", "\n").replace(":", ": ")
     return string
+
 
 def chunk_to_passport(chunk):
     chunk = "[passport]\n" + chunk
@@ -13,8 +15,8 @@ def chunk_to_passport(chunk):
     passport.read_string(chunk)
     return passport["passport"]
 
+
 def is_valid_passport(passport):
-    
     def is_6_digit_hex(s):
         if not s.startswith("#"):
             return False
@@ -24,12 +26,12 @@ def is_valid_passport(passport):
         except ValueError:
             return False
         return len(s) == 6
-    
+
     def is_valid_height(string):
         valid = False
         if "cm" in string:
             value = int(string.replace("cm", ""))
-            valid = 150 <= value <=193
+            valid = 150 <= value <= 193
         if "in" in string:
             value = int(string.replace("in", ""))
             valid = 59 <= value <= 76
@@ -42,9 +44,8 @@ def is_valid_passport(passport):
         "hgt": lambda s: is_valid_height(s),
         "hcl": lambda s: is_6_digit_hex(s),
         "ecl": lambda s: s in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"],
-        "pid": lambda s: bool(re.fullmatch(r"\d{9}", s))
+        "pid": lambda s: bool(re.fullmatch(r"\d{9}", s)),
     }
-    optional = ["cid"]
 
     valid = True
     for tag, rule in rules.items():
@@ -53,7 +54,7 @@ def is_valid_passport(passport):
 
 
 if __name__ == "__main__":
-    with open("input") as fp:
+    with open("day_04/input") as fp:
         input_string = fp.read()
 
     string = moddify_input_string(input_string)
@@ -65,5 +66,5 @@ if __name__ == "__main__":
 
     with open("input_mod", "w") as fp:
         fp.write(string)
-    
+
     print(f"Found valid passports: {valid_passport_count}")
