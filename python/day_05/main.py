@@ -9,7 +9,7 @@ def decode(code):
     exponent = len(code) - 1
     head, tail = code[0], code[1:]
     digit = bin_values[head]
-    value = digit * 2**exponent
+    value = digit * 2 ** exponent
     return value + decode(tail)
 
 
@@ -24,5 +24,4 @@ if __name__ == "__main__":
         seat_id = row * 8 + col
         seat_ids.append(seat_id)
 
-    
     print(f"Highest seat id is: {max(seat_ids)}")
