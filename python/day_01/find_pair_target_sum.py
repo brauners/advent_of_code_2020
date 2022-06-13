@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     target_sum = 2020
     # found = find_pair_summing_naive(expenses, target_sum)
-    found = find_pair_set(expenses, target_sum)
+    found =  find_pair_set(expenses, target_sum)
 
     print(f"Pair found is {found[0]} and {found[1]}")
     print(f"Solution to puzzle is: {found[0] * found[1]}")

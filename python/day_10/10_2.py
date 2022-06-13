@@ -1,5 +1,5 @@
 if __name__ == "__main__":
-    with open("10.in") as f:
+    with open("day_10/10.in") as f:
         jolts = [int(x.strip()) for x in f.readlines()]
 
     jolts.sort()
@@ -7,13 +7,14 @@ if __name__ == "__main__":
 
     connections = {}
     rev_jolts = list(reversed([0] + jolts))
+    
     for i, jolt in enumerate(rev_jolts):
         connects_to = []
         for next_jolt in rev_jolts[i+1::]:
             if jolt - next_jolt > 3:
                 break
             connects_to.append(next_jolt)
-        connections[jolt] = connects_to.copy()
+        connections[jolt] = connects_to
         
     paths = {0 : 1}
 

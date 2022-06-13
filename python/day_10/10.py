@@ -1,7 +1,7 @@
 
 
 if __name__ == "__main__":
-    with open("10_test.in") as f:
+    with open("day_10/input") as f:
         jolts = [int(x.strip()) for x in f.readlines()]
 
     jolts.sort()
